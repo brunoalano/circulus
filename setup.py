@@ -1,3 +1,4 @@
+from setuptools import setup, find_packages
 setup(
   # Project
   name = 'circulus',
@@ -13,6 +14,5 @@ setup(
   packages = find_packages(),
   install_requires=[],
   description = '',
-  long_description = '''Long description''',
   platforms = 'any'
 )
