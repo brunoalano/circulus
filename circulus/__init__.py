@@ -19,3 +19,8 @@ __version__ = '0.0.1'
 __author__ = 'Bruno Alano Medina'
 __license__ = 'GNU GPLv3'
 __copyright__ = 'Copyright 2015 Bruno Medina'
+
+# Default logger
+import logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
