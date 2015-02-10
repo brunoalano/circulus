@@ -11,6 +11,8 @@ handle events about file modifications
 
 from watchdog.observers import Observer
 import watchdog.events
+from circulus.stream import Stream
+import time
 
 class SyncHandler(watchdog.events.FileSystemEventHandler):
   """File synchronization event handler with 3rd party services
@@ -22,6 +24,9 @@ class SyncHandler(watchdog.events.FileSystemEventHandler):
 
   """
 
+  # File streamer
+  stream = Stream()
+
   # Catch anything
   def on_any_event(self, event):
     """Catch any event occurred in the filesystem
@@ -30,6 +35,7 @@ class SyncHandler(watchdog.events.FileSystemEventHandler):
       event (obj): Watchdog
 
     """
+    time.sleep(2) # 2 seconds
     if event.is_directory:
       self.directoryHandler(event)
     else:
@@ -46,8 +52,9 @@ class SyncHandler(watchdog.events.FileSystemEventHandler):
 
     # Python switch-like statement
     if isinstance(event, watchdog.events.FileCreatedEvent):
-      # File created
-      print('Created')
+      # Send file path to Streamer to add to database and
+      # send to Stream Service
+      self.stream.send_file(event.src_path)
     elif isinstance(event, watchdog.events.FileDeletedEvent):
       # File deleted
       print('Deleted')

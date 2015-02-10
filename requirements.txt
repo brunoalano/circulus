@@ -2,3 +2,4 @@ appdirs==1.4.0
 boto==2.36.0
 PyYAML==3.11
 watchdog==0.8.2
+filechunkio==1.6

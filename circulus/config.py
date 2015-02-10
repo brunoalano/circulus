@@ -45,7 +45,12 @@ class Config:
     if not os.path.isfile(self.config_file):
       with open(self.config_file, 'w+') as cfg_file:
         self.config.add_section('circulus')
+        self.config.add_section('aws')
         self.config.set('circulus', 'sync_path', os.path.expanduser('~/sync'))
+        self.config.set('aws', 'access_key', '<aws access key>')
+        self.config.set('aws', 'secret_access_key', '<aws secret key>')
+        self.config.set('aws', 'bucket_name', 'circulus')
+        self.config.set('aws', 'bucket_region', 'us-east-1')
         self.config.write(cfg_file)
     else:
       self.config.read(self.config_file)
